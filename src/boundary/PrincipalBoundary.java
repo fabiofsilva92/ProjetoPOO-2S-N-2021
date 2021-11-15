@@ -15,6 +15,9 @@ public class PrincipalBoundary extends Application {
 
     private ClienteBoundary cb = new ClienteBoundary();
 
+    private CreditoBoundary creditoBoundary = new CreditoBoundary();
+    private ComoUsarBoundary comoUsarBoundary = new ComoUsarBoundary();
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -28,6 +31,7 @@ public class PrincipalBoundary extends Application {
         MenuItem itemSair = new MenuItem("Sair");
         MenuItem itemPets = new MenuItem("Clientes");
         MenuItem itemCreditos = new MenuItem("Créditos");
+        MenuItem itemComoUsar = new MenuItem("Como Usar?");
 
         itemSair.setOnAction(e -> {
             Platform.exit();
@@ -38,9 +42,21 @@ public class PrincipalBoundary extends Application {
 
 //        itemCreditos.setOnAction(this);
 
+        itemCreditos.setOnAction((e) -> {
+
+            panePrincipal.setCenter(creditoBoundary.render());
+
+        });
+
+        itemComoUsar.setOnAction((e) -> {
+            panePrincipal.setCenter(comoUsarBoundary.render());
+        });
+
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemPets);
         menuAjuda.getItems().add(itemCreditos);
+        menuAjuda.getItems().add(itemComoUsar);
+
 
 
         menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAjuda);
