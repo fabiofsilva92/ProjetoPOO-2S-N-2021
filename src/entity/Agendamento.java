@@ -8,8 +8,18 @@ public class Agendamento {
     private long id = 0;
     private String nome = "";
     private String sobrenome = "";
+    private String aula = "";
     private LocalDate dataAgendamento = LocalDate.now();
     private LocalTime horario = LocalTime.now();
+
+
+    public String getAula() {
+        return aula;
+    }
+
+    public void setAula(String aula) {
+        this.aula = aula;
+    }
 
     public LocalTime getHorario() {
         return horario;

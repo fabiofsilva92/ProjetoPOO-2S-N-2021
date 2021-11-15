@@ -13,11 +13,12 @@ import java.util.List;
 
 public class AgendamentoControl {
 
-    LongProperty id = new SimpleLongProperty(0);
-    StringProperty nome = new SimpleStringProperty("");
-    StringProperty sobrenome = new SimpleStringProperty("");
-    ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
-    ObjectProperty horarioAgendamento = new SimpleObjectProperty(LocalTime.now());
+    public LongProperty id = new SimpleLongProperty(0);
+    public StringProperty nome = new SimpleStringProperty("");
+    public StringProperty sobrenome = new SimpleStringProperty("");
+    public StringProperty aula = new SimpleStringProperty("");
+    public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
+    public ObjectProperty horarioAgendamento = new SimpleObjectProperty(LocalTime.now());
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
 
@@ -26,6 +27,7 @@ public class AgendamentoControl {
         a.setId(id.get());
         a.setNome(nome.get());
         a.setSobrenome(sobrenome.get());
+        a.setAula(aula.get());
         a.setDataAgendamento((LocalDate) dataAgendamento.get());
         a.setHorario((LocalTime) horarioAgendamento.get());
 
@@ -36,6 +38,7 @@ public class AgendamentoControl {
         id.set((a.getId()));
         nome.set(a.getNome());
         sobrenome.set(a.getSobrenome());
+        aula.set(a.getAula());
         dataAgendamento.set(a.getDataAgendamento());
         horarioAgendamento.set(a.getHorario());
     }

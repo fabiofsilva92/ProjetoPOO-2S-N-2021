@@ -28,6 +28,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
     public PrincipalBoundary() {
         telas.put("Clientes", new ClienteBoundary());
         telas.put("Créditos", new CreditoBoundary());
+        telas.put("Agendamento Aulas", new AgendamentoBoundary());
     }
 
     @Override
@@ -39,10 +40,12 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         Menu menuArquivo = new Menu("Arquivos");
         Menu menuCadastros = new Menu("Cadastros");
         Menu menuAjuda = new Menu("Ajuda");
+        Menu menuAgendamento = new Menu("Agendamento Aulas");
 
         MenuItem itemSair = new MenuItem("Sair");
         MenuItem itemCadastro = new MenuItem("Clientes");
         MenuItem itemCreditos = new MenuItem("Créditos");
+        MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
 
         itemSair.setOnAction(e -> {
@@ -61,14 +64,16 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
+        menuAgendamento.getItems().add(itemAgendamento);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);
 
         itemCadastro.setOnAction(this);
+        itemAgendamento.setOnAction(this);
         itemCreditos.setOnAction(this);
 
 
-        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAjuda);
+        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda);
 
         panePrincipal.setTop(menuPrincipal);
 //        panePrincipal.setCenter(cb.render());
