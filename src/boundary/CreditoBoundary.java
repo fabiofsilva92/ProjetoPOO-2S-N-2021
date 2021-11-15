@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class CreditoBoundary {
+public class CreditoBoundary implements StrategyBoundary{
 
     public Pane render() {
         VBox pane = new VBox();

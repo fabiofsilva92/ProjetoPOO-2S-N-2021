@@ -2,6 +2,9 @@ package boundary;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -9,14 +12,23 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class PrincipalBoundary extends Application {
+import java.util.HashMap;
+import java.util.Map;
+
+public class PrincipalBoundary extends Application implements EventHandler<ActionEvent> {
 
     private BorderPane panePrincipal = new BorderPane();
 
-    private ClienteBoundary cb = new ClienteBoundary();
+//    private ClienteBoundary cb = new ClienteBoundary();
 
-    private CreditoBoundary creditoBoundary = new CreditoBoundary();
+//    private CreditoBoundary creditoBoundary = new CreditoBoundary();
     private ComoUsarBoundary comoUsarBoundary = new ComoUsarBoundary();
+    Map<String, StrategyBoundary> telas = new HashMap<>();
+
+    public PrincipalBoundary() {
+        telas.put("Clientes", new ClienteBoundary());
+        telas.put("Créditos", new CreditoBoundary());
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -29,7 +41,7 @@ public class PrincipalBoundary extends Application {
         Menu menuAjuda = new Menu("Ajuda");
 
         MenuItem itemSair = new MenuItem("Sair");
-        MenuItem itemPets = new MenuItem("Clientes");
+        MenuItem itemCadastro = new MenuItem("Clientes");
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
 
@@ -38,31 +50,28 @@ public class PrincipalBoundary extends Application {
             System.exit(0);
         });
 
-//        itemPets.setOnAction(this);
 
-//        itemCreditos.setOnAction(this);
-
-        itemCreditos.setOnAction((e) -> {
-
-            panePrincipal.setCenter(creditoBoundary.render());
-
-        });
-
-        itemComoUsar.setOnAction((e) -> {
-            panePrincipal.setCenter(comoUsarBoundary.render());
-        });
+//        itemCreditos.setOnAction((e) -> {
+//            panePrincipal.setCenter(creditoBoundary.render());
+//        });
+//
+//        itemComoUsar.setOnAction((e) -> {
+//            panePrincipal.setCenter(comoUsarBoundary.render());
+//        });
 
         menuArquivo.getItems().add(itemSair);
-        menuCadastros.getItems().add(itemPets);
+        menuCadastros.getItems().add(itemCadastro);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);
 
+        itemCadastro.setOnAction(this);
+        itemCreditos.setOnAction(this);
 
 
         menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAjuda);
 
         panePrincipal.setTop(menuPrincipal);
-        panePrincipal.setCenter(cb.render());
+//        panePrincipal.setCenter(cb.render());
 
         stage.setScene(scn);
         stage.setTitle("Gestão Academia Javeiros");
@@ -74,4 +83,15 @@ public class PrincipalBoundary extends Application {
         Application.launch(PrincipalBoundary.class, args);
     }
 
+    @Override
+    public void handle(ActionEvent event) {
+        EventTarget target = event.getTarget();
+
+        if (target instanceof MenuItem) {
+            MenuItem menu = (MenuItem) target;
+            String texto = menu.getText();
+            StrategyBoundary tela = telas.get(texto);
+            panePrincipal.setCenter(tela.render());
+        }
+    }
 }
