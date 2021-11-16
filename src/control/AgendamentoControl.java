@@ -18,7 +18,7 @@ public class AgendamentoControl {
     public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
-    public ObjectProperty horarioAgendamento = new SimpleObjectProperty();
+    public ObjectProperty<LocalTime> horarioAgendamento = new SimpleObjectProperty();
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
 
@@ -41,6 +41,7 @@ public class AgendamentoControl {
         aula.set(a.getAula());
         dataAgendamento.set(a.getDataAgendamento());
         horarioAgendamento.set(a.getHorario());
+        System.out.println(horarioAgendamento.toString());
     }
 
     public void novoAgendamento() {
