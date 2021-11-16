@@ -3,6 +3,7 @@ package boundary;
 import control.AgendamentoControl;
 import entity.Agendamento;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +12,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.converter.LocalTimeStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 import javax.management.timer.Timer;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 
 public class AgendamentoBoundary implements StrategyBoundary {
 
@@ -24,7 +29,8 @@ public class AgendamentoBoundary implements StrategyBoundary {
     private TextField txtSobrenome = new TextField();
     private ComboBox<String> cmbAulas = new ComboBox<>();
     private DatePicker dataAgendamento = new DatePicker();
-    private TextField horario = new TextField();
+//    private TextField horario = new TextField();
+    private Spinner<LocalTime> horario = new Spinner<>();
 
     private Button btnAdicionar = new Button("Adicionar");
     private Button btnNovoHorario = new Button("Novo Horario");
@@ -33,6 +39,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
     private AgendamentoControl control = new AgendamentoControl();
     private TableView<Agendamento> table = new TableView<>();
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private DateTimeFormatter dt = DateTimeFormatter.ofPattern("K:mm");
 
 
     private void criarTabela() {
@@ -40,6 +47,34 @@ public class AgendamentoBoundary implements StrategyBoundary {
         ObservableList<String> aulas =
                 FXCollections.observableArrayList("Natação", "Box", "Spinner", "Dança");
         cmbAulas.setItems(aulas);
+
+        SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
+
+            {
+                setValue(defaultValue());
+//                setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), DateTimeFormatter.ofPattern("HH:mm")));
+            }
+
+            private LocalTime defaultValue() {
+                return LocalTime.now().truncatedTo(ChronoUnit.HOURS);
+            }
+
+            @Override
+            public void decrement(int steps) {
+                LocalTime value = getValue();
+                setValue(value == null ? defaultValue() : value.minusHours(steps));
+            }
+
+            @Override
+            public void increment(int steps) {
+                LocalTime value = getValue();
+                setValue(value == null ? defaultValue() : value.plusHours(steps));
+            }
+
+
+        };
+        horario.setValueFactory(factory);
+
 
         TableColumn<Agendamento, Long> col1 = new TableColumn<>("ID");
         col1.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -57,8 +92,15 @@ public class AgendamentoBoundary implements StrategyBoundary {
             return new ReadOnlyStringWrapper(strData);
         });
 
+        TableColumn<Agendamento, String> col5 = new TableColumn<>("Horario");
+        col5.setCellValueFactory(hor -> {
+            LocalTime n = hor.getValue().getHorario();
+            String strData = n.format(this.dt);
+            return new ReadOnlyStringWrapper(strData);
+        });
 
-        table.getColumns().addAll(col1, col2, col3, col4);
+
+        table.getColumns().addAll(col1, col2, col3, col4, col5);
 
 
     }
@@ -75,22 +117,22 @@ public class AgendamentoBoundary implements StrategyBoundary {
         Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
         Bindings.bindBidirectional(cmbAulas.valueProperty(), control.aula);
         Bindings.bindBidirectional(dataAgendamento.valueProperty(), control.dataAgendamento);
-        Bindings.bindBidirectional(horario.textProperty(), control.horarioAgendamento);
+        Bindings.bindBidirectional(horario.valueFactoryProperty(), control.horarioAgendamento);
 
         panCampos.add(new Label("Id"), 0, 0);
         panCampos.add(txtid, 1, 0);
 
         panCampos.add(new Label("Nome"), 0, 1);
-        panCampos.add(txtNome, 1,1);
+        panCampos.add(txtNome, 1, 1);
 
         panCampos.add(new Label("Sobre Nome"), 0, 2);
-        panCampos.add(txtSobrenome, 1,2);
+        panCampos.add(txtSobrenome, 1, 2);
 
         panCampos.add(new Label("Aulas"), 0, 3);
-        panCampos.add(cmbAulas, 1,3);
+        panCampos.add(cmbAulas, 1, 3);
 
         panCampos.add(new Label("Data Agendamento"), 0, 4);
-        panCampos.add(dataAgendamento, 1,4);
+        panCampos.add(dataAgendamento, 1, 4);
 
         panCampos.add(new Label("Horario"), 0, 5);
         panCampos.add(horario, 1, 5);
