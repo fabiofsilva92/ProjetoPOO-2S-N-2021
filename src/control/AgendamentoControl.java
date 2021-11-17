@@ -18,7 +18,7 @@ public class AgendamentoControl {
     public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
-    public ObjectProperty<LocalTime> horarioAgendamento = new SimpleObjectProperty();
+    public StringProperty horarioAgendamento = new SimpleStringProperty();
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
 
@@ -29,7 +29,7 @@ public class AgendamentoControl {
         a.setSobrenome(sobrenome.get());
         a.setAula(aula.get());
         a.setDataAgendamento((LocalDate) dataAgendamento.get());
-        a.setHorario((LocalTime) horarioAgendamento.get());
+        a.setHorario(horarioAgendamento.get());
 
         return a;
     }
@@ -51,6 +51,11 @@ public class AgendamentoControl {
 
     public void salvar() {
         Agendamento a = getEntity();
+
+        System.out.println("horario da control: " + horarioAgendamento.get());
+        System.out.println("Nome da control: " + nome.get());
+        System.out.println("Sobrenome da control: " + a.getSobrenome());
+        System.out.println("Aula da control: " + a.getAula());
 
         if (a.getId() == 0) {
 //            agendamentoDAO.adicionar(p);

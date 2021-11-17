@@ -10,7 +10,7 @@ public class Agendamento {
     private String sobrenome = "";
     private String aula = "";
     private LocalDate dataAgendamento = LocalDate.now();
-    private LocalTime horario = LocalTime.now();
+    private String horario = "";
 
 
     public String getAula() {
@@ -21,11 +21,11 @@ public class Agendamento {
         this.aula = aula;
     }
 
-    public LocalTime getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalTime horario) {
+    public void setHorario(String horario) {
         this.horario =  horario;
     }
 
