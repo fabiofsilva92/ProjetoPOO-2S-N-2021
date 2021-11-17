@@ -8,7 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AgendamentoControl {
@@ -18,7 +20,8 @@ public class AgendamentoControl {
     public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
-    public StringProperty horarioAgendamento = new SimpleStringProperty();
+    public StringProperty horarioAgendamento = new SimpleStringProperty(getTime());
+
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
 
@@ -41,7 +44,7 @@ public class AgendamentoControl {
         aula.set(a.getAula());
         dataAgendamento.set(a.getDataAgendamento());
         horarioAgendamento.set(a.getHorario());
-        System.out.println(horarioAgendamento.toString());
+        System.out.println("To aqui " + horarioAgendamento.get());
     }
 
     public void novoAgendamento() {
@@ -83,6 +86,14 @@ public class AgendamentoControl {
     public void atualizarListaView() {
         listaView.clear();
 //        listaView.addAll(AgendamentoDAO.pesquisarPorNome(""));
+    }
+
+    static LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+
+
+    public static String getTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:00");
+        return formatter.format(ldt);
     }
 
 

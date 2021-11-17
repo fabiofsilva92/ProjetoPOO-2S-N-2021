@@ -100,26 +100,11 @@ public class AgendamentoBoundary implements StrategyBoundary {
             }
         };
 
-
-
         horario.setValueFactory(factory);
         txtHorario.setText(horario.getValue().toString());
-//        LocalTimeStringConverter horario2 = horario.valueFactoryProperty();
-        LocalTime horario3 = horario.getValue();
 
-//        ObjectProperty<LocalTime> horario2 = new SimpleObjectProperty<LocalTime>(horario.getValueFactory());
+        System.out.println("Vou enviar isso " + txtHorario.textProperty());
 
-
-
-
-//         LocalTime converterProperty = horario.getValue();
-
-
-
-
-//        horario.se
-//            horario.getValueFactory();
-//             horario.valueFactoryProperty().get().getValue();
         System.out.println(horario.getValue());
 
         Bindings.bindBidirectional(txtid.textProperty(), control.id, new NumberStringConverter());
@@ -128,7 +113,6 @@ public class AgendamentoBoundary implements StrategyBoundary {
         Bindings.bindBidirectional(cmbAulas.valueProperty(), control.aula);
         Bindings.bindBidirectional(dataAgendamento.valueProperty(), control.dataAgendamento);
         Bindings.bindBidirectional(txtHorario.textProperty(), control.horarioAgendamento);
-//        Bindings.bindBidirectional(horario3, control.horarioAgendamento);
 
         panCampos.add(new Label("Id"), 0, 0);
         panCampos.add(txtid, 1, 0);
