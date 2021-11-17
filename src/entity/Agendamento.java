@@ -26,7 +26,7 @@ public class Agendamento {
     }
 
     public void setHorario(LocalTime horario) {
-        this.horario = horario;
+        this.horario =  horario;
     }
 
     public long getId() {

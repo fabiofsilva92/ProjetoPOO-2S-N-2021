@@ -17,10 +17,10 @@ import javafx.util.StringConverter;
 import javafx.util.converter.LocalTimeStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class AgendamentoBoundary implements StrategyBoundary {
 
@@ -29,7 +29,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
     private TextField txtSobrenome = new TextField();
     private ComboBox<String> cmbAulas = new ComboBox<>();
     private DatePicker dataAgendamento = new DatePicker();
-//    private TextField horario = new TextField();
+    //    private TextField horario = new TextField();
     private Spinner<LocalTime> horario = new Spinner<>();
     private Button btnAdicionar = new Button("Adicionar");
     private Button btnNovoHorario = new Button("Novo Horario");
@@ -46,41 +46,6 @@ public class AgendamentoBoundary implements StrategyBoundary {
         ObservableList<String> aulas =
                 FXCollections.observableArrayList("Natação", "Box", "Spinner", "Dança");
         cmbAulas.setItems(aulas);
-
-        SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
-
-            {
-                setValue(defaultValue());
-//                setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), DateTimeFormatter.ofPattern("HH:mm")));
-            }
-
-            private LocalTime defaultValue() {
-                return LocalTime.now().truncatedTo(ChronoUnit.HOURS);
-            }
-
-            @Override
-            public void decrement(int steps) {
-                LocalTime value = getValue();
-                setValue(value == null ? defaultValue() : value.minusHours(steps));
-            }
-
-            @Override
-            public void increment(int steps) {
-                LocalTime value = getValue();
-                setValue(value == null ? defaultValue() : value.plusHours(steps));
-            }
-
-
-
-        };
-
-            horario.setValueFactory(factory);
-            LocalTime horario2 = horario.getValue();
-        System.out.println(horario.getValue());
-//        horario.
-//        ObjectProperty <LocalTime> value = new SimpleObjectProperty<SpinnerValueFactory>( this , horario);
-
-
 
         TableColumn<Agendamento, Long> col1 = new TableColumn<>("ID");
         col1.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -105,10 +70,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
             return new ReadOnlyStringWrapper(strData);
         });
 
-
         table.getColumns().addAll(col1, col2, col3, col4, col5);
-
-
     }
 
 
@@ -118,12 +80,50 @@ public class AgendamentoBoundary implements StrategyBoundary {
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
 
+        SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
+            {
+                setValue(defaultValue());
+//                setConverter(new LocalTimeStringConverter(DateTimeFormatter.ofPattern("HH:mm"), DateTimeFormatter.ofPattern("HH:mm")));
+            }
+
+            private LocalTime defaultValue() {
+                return LocalTime.now().truncatedTo(ChronoUnit.HOURS);
+            }
+
+            @Override
+            public void decrement(int steps) {
+                LocalTime value = getValue();
+                setValue(value == null ? defaultValue() : value.minusHours(steps));
+            }
+
+            @Override
+            public void increment(int steps) {
+                LocalTime value = getValue();
+                setValue(value == null ? defaultValue() : value.plusHours(steps));
+            }
+        };
+
+
+        horario.setValueFactory(factory);
+//        LocalTimeStringConverter horario2 = horario.valueFactoryProperty();
+        LocalTime horario3 = horario.getValue();
+
+//        ObjectProperty<LocalTime> horario2 = new SimpleObjectProperty<LocalTime>(horario.getValueFactory());
+
+         final String converterProperty = horario.valueFactoryProperty().toString();
+
+
+//        horario.se
+//            horario.getValueFactory();
+//             horario.valueFactoryProperty().get().getValue();
+        System.out.println(horario.getValue());
+
         Bindings.bindBidirectional(txtid.textProperty(), control.id, new NumberStringConverter());
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
         Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
         Bindings.bindBidirectional(cmbAulas.valueProperty(), control.aula);
         Bindings.bindBidirectional(dataAgendamento.valueProperty(), control.dataAgendamento);
-//        Bindings.bindBidirectional(horario.valueProperty(), control.horarioAgendamento);
+        Bindings.bindBidirectional(horario3, control.horarioAgendamento);
 
         panCampos.add(new Label("Id"), 0, 0);
         panCampos.add(txtid, 1, 0);
@@ -156,4 +156,6 @@ public class AgendamentoBoundary implements StrategyBoundary {
 
         return (panPrincipal);
     }
+
+
 }
