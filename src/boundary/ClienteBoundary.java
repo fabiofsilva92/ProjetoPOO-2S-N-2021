@@ -28,7 +28,7 @@ public class ClienteBoundary implements StrategyBoundary{
     private TextField txtNumTelefone = new TextField();
     private TextField txtSexo = new TextField();
 
-    private Button btnNovoCliente = new Button("Novo Cliente");
+    private Button btnNovoCliente = new Button("Novo entity.Cliente");
     private Button btnSalvar = new Button("Salvar");
     private Button btnPesquisar = new Button("Pesquisar");
 
@@ -145,7 +145,7 @@ public class ClienteBoundary implements StrategyBoundary{
         panCampos.add(new Label("DDD"), 0, 5);
         panCampos.add(txtDDD, 1, 5);
 
-        panCampos.add(new Label("Telefone"), 2, 5);
+        panCampos.add(new Label("entity.Telefone"), 2, 5);
         panCampos.add(txtNumTelefone, 3, 5);
 
         panCampos.add(new Label("Sexo"), 0, 6);

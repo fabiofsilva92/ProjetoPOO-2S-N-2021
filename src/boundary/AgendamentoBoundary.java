@@ -3,9 +3,7 @@ package boundary;
 import control.AgendamentoControl;
 import entity.Agendamento;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -13,8 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.util.StringConverter;
-import javafx.util.converter.LocalTimeStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 import java.time.LocalDate;
@@ -31,9 +27,10 @@ public class AgendamentoBoundary implements StrategyBoundary {
     private ComboBox<String> cmbAulas = new ComboBox<>();
     private DatePicker dataAgendamento = new DatePicker();
     //    private TextField horario = new TextField();
-    private Spinner<LocalTime> horario = new Spinner<>();
+//    private Spinner<LocalTime> horario = new Spinner<>();
     private Button btnAdicionar = new Button("Adicionar");
-    private Button btnNovoHorario = new Button("Novo Horario");
+    private Button btnPesquisar = new Button("Pesquisar");
+    Spinner horario = new Spinner(8, 22, 00);
 
 
     private AgendamentoControl control = new AgendamentoControl();
@@ -77,6 +74,10 @@ public class AgendamentoBoundary implements StrategyBoundary {
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
 
+        Spinner<LocalTime> day = new Spinner<LocalTime>(8, 22, 0);
+        //Setting the spinner editable
+        day.setEditable(true);
+
         SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
             {
                 setValue(defaultValue());
@@ -101,9 +102,6 @@ public class AgendamentoBoundary implements StrategyBoundary {
         };
 
         horario.setValueFactory(factory);
-        txtHorario.setText(horario.getValue().toString());
-
-        System.out.println("Vou enviar isso " + txtHorario.textProperty());
 
         System.out.println(horario.getValue());
 
@@ -126,26 +124,30 @@ public class AgendamentoBoundary implements StrategyBoundary {
         panCampos.add(new Label("Aulas"), 0, 3);
         panCampos.add(cmbAulas, 1, 3);
 
-        panCampos.add(new Label("Data Agendamento"), 0, 4);
+        panCampos.add(new Label("Data entity.Agendamento"), 0, 4);
         panCampos.add(dataAgendamento, 1, 4);
 
         panCampos.add(new Label("Horario"), 0, 5);
         panCampos.add(horario, 1, 5);
 
         panCampos.add(btnAdicionar, 2, 5);
+        panCampos.add(btnPesquisar, 3, 5);
 
         btnAdicionar.setOnAction(e -> {
             control.salvar();
         });
 
-
         horario.setOnMouseClicked(e -> {
             //Setando o horario de um textproperty servindo como binding
             txtHorario.setText(horario.getValue().toString());
-
-            System.out.println("horario getext" +txtHorario.getText());
-            System.out.println("clicou " + horario.getValue().toString());
         });
+
+        btnPesquisar.setOnAction(e -> {
+            control.pesquisar();
+        });
+
+
+
 
         panPrincipal.setTop(panCampos);
         panPrincipal.setCenter(table);

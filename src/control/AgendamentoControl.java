@@ -1,17 +1,15 @@
 package control;
 
-import boundary.StrategyBoundary;
 import entity.Agendamento;
+import DAO.AgendamentoDAO;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class AgendamentoControl {
 
@@ -21,6 +19,7 @@ public class AgendamentoControl {
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
     public StringProperty horarioAgendamento = new SimpleStringProperty(getTime());
+//    private AgendamentoDAO agendamentoDAO = new AgendamentoDAOImplements();
 
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
@@ -44,7 +43,6 @@ public class AgendamentoControl {
         aula.set(a.getAula());
         dataAgendamento.set(a.getDataAgendamento());
         horarioAgendamento.set(a.getHorario());
-        System.out.println("To aqui " + horarioAgendamento.get());
     }
 
     public void novoAgendamento() {
@@ -73,7 +71,7 @@ public class AgendamentoControl {
     public void pesquisar() {
         listaView.clear();
 
-//        List<Agendamento> encontrados = agendamentoDAO.pesquisarPorNome(nome.get());
+//        List<entity.Agendamento> encontrados = agendamentoDAO.pesquisarPorNome(nome.get());
 //        listaView.addAll(encontrados);
 
     }
@@ -85,7 +83,7 @@ public class AgendamentoControl {
 
     public void atualizarListaView() {
         listaView.clear();
-//        listaView.addAll(AgendamentoDAO.pesquisarPorNome(""));
+//        listaView.addAll(br.est.fatec.entity.conexao.DAO.AgendamentoDAO.pesquisarPorNome(""));
     }
 
     static LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.now());
