@@ -28,7 +28,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
     public PrincipalBoundary() {
         telas.put("Clientes", new ClienteBoundary());
         telas.put("Créditos", new CreditoBoundary());
-        telas.put("entity.Agendamento Aulas", new AgendamentoBoundary());
+        telas.put("Agendamento Aulas", new AgendamentoBoundary());
     }
 
     @Override

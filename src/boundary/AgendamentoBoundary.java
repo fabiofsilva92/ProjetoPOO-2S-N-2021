@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 public class AgendamentoBoundary implements StrategyBoundary {
 
@@ -51,7 +52,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
         TableColumn<Agendamento, String> col2 = new TableColumn<>("Nome");
         col2.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-        TableColumn<Agendamento, String> col3 = new TableColumn<>("SobreNome");
+        TableColumn<Agendamento, String> col3 = new TableColumn<>("Sobre Nome");
         col3.setCellValueFactory(new PropertyValueFactory<>("sobreNome"));
 
         TableColumn<Agendamento, String> col4 = new TableColumn<>("Data Agentamento");
@@ -64,9 +65,43 @@ public class AgendamentoBoundary implements StrategyBoundary {
         TableColumn<Agendamento, String> col5 = new TableColumn<>("Horario");
         col5.setCellValueFactory(new PropertyValueFactory<>("horario"));
 
-        table.getColumns().addAll(col1, col2, col3, col4, col5);
-    }
+        TableColumn<Agendamento, String> col6 = new TableColumn<>("Ações");
+        col6.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        col6.setCellFactory((tbCol) -> new TableCell<Agendamento, String>() {
+            final Button btn = new Button("Remover");
 
+            public void updateItem(String item, boolean empty) {
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    btn.setOnAction(e -> {
+                        Agendamento a = getTableView().getItems().get(getIndex());
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Você confirma a remoção do ID "
+                                + a.getId() + " ?", ButtonType.OK, ButtonType.CANCEL);
+                        Optional<ButtonType> clicado = alert.showAndWait();
+                        if (clicado.isPresent() && clicado.get().equals(ButtonType.OK)) {
+                            control.remover(a.getId());
+                        }
+                    });
+                    setGraphic(btn);
+                    setText(null);
+                }
+            }
+        });
+
+        table.getColumns().addAll(col1, col2, col3, col4, col5, col6);
+
+        table.setItems(control.getLista());
+
+        table.getSelectionModel().selectedItemProperty().addListener(
+                (obs, antigo, novo) -> {
+                    if (novo != null) {
+                        control.setEntity(novo);
+                    }
+                }
+        );
+    }
 
     @Override
     public Pane render() {
@@ -74,9 +109,12 @@ public class AgendamentoBoundary implements StrategyBoundary {
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
 
-        Spinner<LocalTime> day = new Spinner<LocalTime>(8, 22, 0);
-        //Setting the spinner editable
-        day.setEditable(true);
+        txtid.setEditable(false);
+        txtid.setDisable(true);
+
+//        Spinner<LocalTime> day = new Spinner<LocalTime>(8, 22, 0);
+//        //Setting the spinner editable
+//        day.setEditable(true);
 
         SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
             {
@@ -107,7 +145,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
 
         Bindings.bindBidirectional(txtid.textProperty(), control.id, new NumberStringConverter());
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
-        Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
+        Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobreNome);
         Bindings.bindBidirectional(cmbAulas.valueProperty(), control.aula);
         Bindings.bindBidirectional(dataAgendamento.valueProperty(), control.dataAgendamento);
         Bindings.bindBidirectional(txtHorario.textProperty(), control.horarioAgendamento);
@@ -124,7 +162,7 @@ public class AgendamentoBoundary implements StrategyBoundary {
         panCampos.add(new Label("Aulas"), 0, 3);
         panCampos.add(cmbAulas, 1, 3);
 
-        panCampos.add(new Label("Data entity.Agendamento"), 0, 4);
+        panCampos.add(new Label("Data Agendamento"), 0, 4);
         panCampos.add(dataAgendamento, 1, 4);
 
         panCampos.add(new Label("Horario"), 0, 5);
@@ -137,17 +175,14 @@ public class AgendamentoBoundary implements StrategyBoundary {
             control.salvar();
         });
 
-        horario.setOnMouseClicked(e -> {
-            //Setando o horario de um textproperty servindo como binding
-            txtHorario.setText(horario.getValue().toString());
-        });
-
         btnPesquisar.setOnAction(e -> {
             control.pesquisar();
         });
 
-
-
+        horario.setOnMouseClicked(e -> {
+            //Setando o horario de um textproperty servindo como binding
+            txtHorario.setText(horario.getValue().toString());
+        });
 
         panPrincipal.setTop(panCampos);
         panPrincipal.setCenter(table);

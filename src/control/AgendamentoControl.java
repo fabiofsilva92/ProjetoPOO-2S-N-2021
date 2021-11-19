@@ -1,6 +1,6 @@
 package control;
 
-import conexao.AgendamentoDAOImplements;
+import conexaoDAO.AgendamentoDAOImplements;
 import entity.Agendamento;
 import DAO.AgendamentoDAO;
 import javafx.beans.property.*;
@@ -11,12 +11,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class AgendamentoControl {
 
     public LongProperty id = new SimpleLongProperty(0);
     public StringProperty nome = new SimpleStringProperty("");
-    public StringProperty sobrenome = new SimpleStringProperty("");
+    public StringProperty sobreNome = new SimpleStringProperty("");
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
     public StringProperty horarioAgendamento = new SimpleStringProperty(getTime());
@@ -24,12 +25,13 @@ public class AgendamentoControl {
     private AgendamentoDAO agendamentoDAO = new AgendamentoDAOImplements();
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
+    static LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.now());
 
     public Agendamento getEntity() {
         Agendamento a = new Agendamento();
         a.setId(id.get());
         a.setNome(nome.get());
-        a.setSobrenome(sobrenome.get());
+        a.setSobreNome(sobreNome.get());
         a.setAula(aula.get());
         a.setDataAgendamento((LocalDate) dataAgendamento.get());
         a.setHorario(horarioAgendamento.get());
@@ -40,7 +42,7 @@ public class AgendamentoControl {
     public void setEntity(Agendamento a) {
         id.set((a.getId()));
         nome.set(a.getNome());
-        sobrenome.set(a.getSobrenome());
+        sobreNome.set(a.getSobreNome());
         aula.set(a.getAula());
         dataAgendamento.set(a.getDataAgendamento());
         horarioAgendamento.set(a.getHorario());
@@ -56,38 +58,40 @@ public class AgendamentoControl {
 
         System.out.println("horario da control: " + horarioAgendamento.get());
         System.out.println("Nome da control: " + nome.get());
-        System.out.println("Sobrenome da control: " + a.getSobrenome());
+        System.out.println("Sobrenome da control: " + a.getSobreNome());
         System.out.println("Aula da control: " + a.getAula());
 
         if (a.getId() == 0) {
-//            agendamentoDAO.adicionar(p);
+            agendamentoDAO.adicionar(a);
             setEntity(new Agendamento());
         } else {
-//            agendamentoDAO.atualizar(id.get(), a);
+            agendamentoDAO.atualizar(id.get(), a);
         }
 
-//        atualizarListaView();
+        atualizarListaView();
     }
 
     public void pesquisar() {
         listaView.clear();
 
-//        List<entity.Agendamento> encontrados = agendamentoDAO.pesquisarPorNome(nome.get());
-//        listaView.addAll(encontrados);
-
+        List<Agendamento> encontrados = agendamentoDAO.pesquisarPorNome(nome.get());
+        listaView.addAll(encontrados);
     }
 
+    public ObservableList<Agendamento> getLista() {
+        return listaView;
+    }
+
+
     public void remover(long id) {
-//        agendamentoDAO.remover(id);
-//        AtualizarListaView();
+        agendamentoDAO.remover(id);
+        atualizarListaView();
     }
 
     public void atualizarListaView() {
         listaView.clear();
-//        listaView.addAll(br.est.fatec.entity.conexao.DAO.AgendamentoDAO.pesquisarPorNome(""));
+        listaView.addAll(agendamentoDAO.pesquisarPorNome(" "));
     }
-
-    static LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.now());
 
 
     public static String getTime() {

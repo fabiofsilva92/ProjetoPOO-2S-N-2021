@@ -6,7 +6,7 @@ public class Agendamento {
 
     private long id = 0;
     private String nome = "";
-    private String sobrenome = "";
+    private String sobreNome = "";
     private String aula = "";
     private LocalDate dataAgendamento = LocalDate.now();
     private String horario = "";
@@ -44,12 +44,12 @@ public class Agendamento {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public String getSobreNome() {
+        return sobreNome;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setSobreNome(String sobrenome) {
+        this.sobreNome = sobrenome;
     }
 
     public LocalDate getDataAgendamento() {
