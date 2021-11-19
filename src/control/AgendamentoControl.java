@@ -1,5 +1,6 @@
 package control;
 
+import conexao.AgendamentoDAOImplements;
 import entity.Agendamento;
 import DAO.AgendamentoDAO;
 import javafx.beans.property.*;
@@ -19,8 +20,8 @@ public class AgendamentoControl {
     public StringProperty aula = new SimpleStringProperty("");
     public ObjectProperty dataAgendamento = new SimpleObjectProperty(LocalDate.now());
     public StringProperty horarioAgendamento = new SimpleStringProperty(getTime());
-//    private AgendamentoDAO agendamentoDAO = new AgendamentoDAOImplements();
 
+    private AgendamentoDAO agendamentoDAO = new AgendamentoDAOImplements();
 
     private ObservableList<Agendamento> listaView = FXCollections.observableArrayList();
 

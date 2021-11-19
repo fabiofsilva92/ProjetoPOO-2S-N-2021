@@ -1,5 +1,6 @@
-package DAO;
+package conexao;
 
+import DAO.AgendamentoDAO;
 import entity.Agendamento;
 
 import java.util.List;
