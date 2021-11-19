@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AgendamentoDAO {
 
+
     void adicionar(Agendamento a);
 
     List<Agendamento> pesquisarPorNome(String nome);
