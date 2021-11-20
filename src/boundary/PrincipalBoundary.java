@@ -27,6 +27,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         telas.put("Créditos", new CreditoBoundary());
         telas.put("Agendamento Aulas", new AgendamentoBoundary());
         telas.put("Criar/Consultar Funcionário", new FuncionarioBoundary());
+        telas.put("Criar/Consultar Equipamentos", new EquipamentoBoundary());
     }
 
     @Override
@@ -44,6 +45,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         MenuItem itemCadastro = new MenuItem("Criar/Consultar Cliente");
         MenuItem itemTreino = new MenuItem("Criar/Consultar Treinos");
         MenuItem itemCadastroFunc = new MenuItem("Criar/Consultar Funcionário");
+        MenuItem itemCadastroEquip = new MenuItem("Criar/Consultar Equipamentos");
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
@@ -54,18 +56,11 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         });
 
 
-//        itemCreditos.setOnAction((e) -> {
-//            panePrincipal.setCenter(creditoBoundary.render());
-//        });
-//
-//        itemComoUsar.setOnAction((e) -> {
-//            panePrincipal.setCenter(comoUsarBoundary.render());
-//        });
-
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
         menuCadastros.getItems().add(itemTreino);
         menuCadastros.getItems().add(itemCadastroFunc);
+        menuCadastros.getItems().add(itemCadastroEquip);
         menuAgendamento.getItems().add(itemAgendamento);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);
@@ -74,12 +69,12 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         itemAgendamento.setOnAction(this);
         itemCreditos.setOnAction(this);
         itemCadastroFunc.setOnAction(this);
+        itemCadastroEquip.setOnAction(this);
 
 
         menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda);
 
         panePrincipal.setTop(menuPrincipal);
-//        panePrincipal.setCenter(cb.render());
 
         stage.setScene(scn);
         stage.setTitle("Gestão Academia Javeiros");
