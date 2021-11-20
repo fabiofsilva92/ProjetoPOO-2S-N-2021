@@ -26,7 +26,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
     Map<String, StrategyBoundary> telas = new HashMap<>();
 
     public PrincipalBoundary() {
-        telas.put("Clientes", new ClienteBoundary());
+        telas.put("Criar/Consultar Cliente", new ClienteBoundary());
         telas.put("Créditos", new CreditoBoundary());
         telas.put("Agendamento Aulas", new AgendamentoBoundary());
     }
