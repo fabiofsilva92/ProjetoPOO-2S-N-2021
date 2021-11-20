@@ -3,13 +3,13 @@ package entity;
 public class Treino {
 
     private Long id;
-    private String nomeAluno;
+    private String nome;
     private String sobreNome;
     private String tipo;
     private String musculo;
     private int aparelho;
-    private int repeticoesQTD;
     private int repeticoes;
+    private int series;
 
     public Long getId() {
         return id;
@@ -19,19 +19,19 @@ public class Treino {
         this.id = id;
     }
 
-    public String getNomeAluno() {
-        return nomeAluno;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeAluno(String nomeAluno) {
-        this.nomeAluno = nomeAluno;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSobreNome() {
+    public String getsobreNome() {
         return sobreNome;
     }
 
-    public void setSobreNome(String sobreNome) {
+    public void setsobreNome(String sobreNome) {
         this.sobreNome = sobreNome;
     }
 
@@ -59,19 +59,19 @@ public class Treino {
         this.aparelho = aparelho;
     }
 
-    public int getRepeticoesQTD() {
-        return repeticoesQTD;
-    }
-
-    public void setRepeticoesQTD(int repeticoesQTD) {
-        this.repeticoesQTD = repeticoesQTD;
-    }
-
     public int getRepeticoes() {
         return repeticoes;
     }
 
     public void setRepeticoes(int repeticoes) {
         this.repeticoes = repeticoes;
+    }
+
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
     }
 }
