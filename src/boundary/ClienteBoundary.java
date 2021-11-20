@@ -24,7 +24,7 @@ public class ClienteBoundary implements StrategyBoundary{
     private TextField txtSobrenome = new TextField();
     private TextField txtCPF = new TextField();
     private DatePicker txtNascimento = new DatePicker();
-    private TextField txtDDD = new TextField();
+//    private TextField txtDDD = new TextField();
     private TextField txtNumTelefone = new TextField();
     private TextField txtSexo = new TextField();
 
@@ -59,11 +59,11 @@ public class ClienteBoundary implements StrategyBoundary{
             return new ReadOnlyStringWrapper(strData);
         });
 
-        TableColumn<Cliente, String> col6 = new TableColumn<>("DDD");
-        col6.setCellValueFactory(new PropertyValueFactory<>("ddd"));
+//        TableColumn<Cliente, String> col6 = new TableColumn<>("DDD");
+//        col6.setCellValueFactory(new PropertyValueFactory<>("ddd"));
 
-        TableColumn<Cliente, String> col7 = new TableColumn<>("NumTelefone");
-        col7.setCellValueFactory(new PropertyValueFactory<>("numTelefone"));
+        TableColumn<Cliente, String> col7 = new TableColumn<>("Telefone");
+        col7.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
         TableColumn<Cliente, String> col8 = new TableColumn<>("Sexo");
         col8.setCellValueFactory(new PropertyValueFactory<>("sexo"));
@@ -81,7 +81,7 @@ public class ClienteBoundary implements StrategyBoundary{
                     btn.setOnAction( (e) -> {
                         Cliente p = getTableView().getItems().get(getIndex());
                         Alert alert = new Alert(Alert.AlertType.WARNING,
-                                "Você confirma a remoção do Pet Id " +
+                                "Você confirma a remoção do Cliente Id " +
                                         p.getId(), ButtonType.OK, ButtonType.CANCEL);
                         Optional<ButtonType> clicado = alert.showAndWait();
                         if (clicado.isPresent() &&
@@ -95,7 +95,7 @@ public class ClienteBoundary implements StrategyBoundary{
             }
         });
 
-        table.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8, col9);
+        table.getColumns().addAll(col1, col2, col3, col4, col5, col7, col8, col9);
 
         table.setItems(control.getListaCliente());
 
@@ -122,8 +122,8 @@ public class ClienteBoundary implements StrategyBoundary{
         Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
         Bindings.bindBidirectional(txtCPF.textProperty(), control.cpf);
         Bindings.bindBidirectional(txtNascimento.valueProperty(), control.dataNascimento);
-        Bindings.bindBidirectional(txtDDD.textProperty(), control.ddd, new NumberStringConverter());
-        Bindings.bindBidirectional(txtNumTelefone.textProperty(), control.numTelefone, new NumberStringConverter());
+//        Bindings.bindBidirectional(txtDDD.textProperty(), control.ddd, new NumberStringConverter());
+        Bindings.bindBidirectional(txtNumTelefone.textProperty(), control.numTelefone);
         Bindings.bindBidirectional(txtSexo.textProperty(), control.sexo);
 
         panCampos.add(new Label("Id"), 0, 0);
@@ -141,12 +141,12 @@ public class ClienteBoundary implements StrategyBoundary{
 
         panCampos.add(new Label("Nascimento"), 0, 4);
         panCampos.add(txtNascimento, 1, 4);
+//
+//        panCampos.add(new Label("DDD"), 0, 5);
+//        panCampos.add(txtDDD, 1, 5);
 
-        panCampos.add(new Label("DDD"), 0, 5);
-        panCampos.add(txtDDD, 1, 5);
-
-        panCampos.add(new Label("Telefone"), 2, 5);
-        panCampos.add(txtNumTelefone, 3, 5);
+        panCampos.add(new Label("Telefone"), 0, 5);
+        panCampos.add(txtNumTelefone, 1, 5);
 
         panCampos.add(new Label("Sexo"), 0, 6);
         panCampos.add(txtSexo, 1, 6);

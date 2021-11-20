@@ -9,8 +9,8 @@ public class Cliente {
     private String sobrenome = "";
     private String cpf = "";
     private LocalDate dataNascimento = LocalDate.now();
-    private Telefone telefone = new Telefone(0, 0);
-    private char sexo = 'M';
+    private String telefone = "9-9999-9999";
+    private String sexo = "M";
 
 
     public long getId() {
@@ -53,19 +53,19 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    public Telefone getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(Telefone telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 }

@@ -19,8 +19,8 @@ public class ClienteControl {
     public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty cpf = new SimpleStringProperty("");
     public ObjectProperty dataNascimento = new SimpleObjectProperty(LocalDate.now());
-    public IntegerProperty ddd = new SimpleIntegerProperty(0);
-    public LongProperty numTelefone = new SimpleLongProperty(0);
+//    public IntegerProperty ddd = new SimpleIntegerProperty(0);
+    public StringProperty numTelefone = new SimpleStringProperty("11-99999-9999");
     public StringProperty sexo = new SimpleStringProperty("");
 
 
@@ -34,8 +34,9 @@ public class ClienteControl {
         c.setSobrenome(sobrenome.get());
         c.setCpf(cpf.get());
         c.setDataNascimento((LocalDate) dataNascimento.get());
-        c.setTelefone(new Telefone(ddd.get(), numTelefone.get()));
-        c.setSexo(sexo.get().charAt(0));
+//        c.setTelefone(new Telefone(ddd.get(), numTelefone.get()));
+        c.setTelefone(numTelefone.get());
+        c.setSexo(sexo.get());
         return c;
     }
 
@@ -45,9 +46,9 @@ public class ClienteControl {
         sobrenome.set(c.getSobrenome());
         cpf.set(c.getCpf());
         dataNascimento.set(c.getDataNascimento());
-        ddd.set(c.getTelefone().getDdd());
-        numTelefone.set(c.getTelefone().getNumero());
-        sexo.set(c.getSexo()+"");
+//        ddd.set(c.getTelefone().getDdd());
+        numTelefone.set(c.getTelefone());
+        sexo.set(c.getSexo());
     }
 
     public void salvar() {
