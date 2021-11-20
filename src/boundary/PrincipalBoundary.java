@@ -38,12 +38,13 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
         MenuBar menuPrincipal = new MenuBar();
         Menu menuArquivo = new Menu("Arquivos");
-        Menu menuCadastros = new Menu("Cadastros");
+        Menu menuCadastros = new Menu("Cliente");
         Menu menuAjuda = new Menu("Ajuda");
         Menu menuAgendamento = new Menu("Agendamento Aulas");
 
         MenuItem itemSair = new MenuItem("Sair");
-        MenuItem itemCadastro = new MenuItem("Clientes");
+        MenuItem itemCadastro = new MenuItem("Criar/Consultar Cliente");
+        MenuItem itemTreino = new MenuItem("Criar/Consultar Treinos");
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
@@ -64,6 +65,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
+        menuCadastros.getItems().add(itemTreino);
         menuAgendamento.getItems().add(itemAgendamento);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);

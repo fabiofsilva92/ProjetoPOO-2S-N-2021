@@ -6,7 +6,7 @@ public class Agendamento {
 
     private long id = 0;
     private String nome = "";
-    private String sobreNome = "";
+    private String sobreNome = null;
     private String aula = "";
     private LocalDate dataAgendamento = LocalDate.now();
     private String horario = "";
