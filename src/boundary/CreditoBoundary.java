@@ -1,5 +1,6 @@
 package boundary;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -10,7 +11,6 @@ public class CreditoBoundary implements StrategyBoundary{
         VBox pane = new VBox();
 
         pane.getChildren().addAll(
-                new Label("Essa página ainda não está pronta!!!"),
                 new Label("Desenvolvedores: Alex Henrique Pineda, Elisio Ricardo, Fábio Fernandes Silva"),
                 new Label("Faculdade: Faculdade de Tecnologia da Zona Leste"),
                 new Label("Coordenador Luciano Oliveira"),

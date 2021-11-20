@@ -18,17 +18,13 @@ import java.util.Map;
 public class PrincipalBoundary extends Application implements EventHandler<ActionEvent> {
 
     private BorderPane panePrincipal = new BorderPane();
-
-//    private ClienteBoundary cb = new ClienteBoundary();
-
-//    private CreditoBoundary creditoBoundary = new CreditoBoundary();
-    private ComoUsarBoundary comoUsarBoundary = new ComoUsarBoundary();
     Map<String, StrategyBoundary> telas = new HashMap<>();
 
     public PrincipalBoundary() {
         telas.put("Clientes", new ClienteBoundary());
         telas.put("Créditos", new CreditoBoundary());
         telas.put("Agendamento Aulas", new AgendamentoBoundary());
+        telas.put("Funcionário", new FuncionarioBoundary());
     }
 
     @Override
@@ -44,6 +40,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
         MenuItem itemSair = new MenuItem("Sair");
         MenuItem itemCadastro = new MenuItem("Clientes");
+        MenuItem itemCadastroFunc = new MenuItem("Funcionário");
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
@@ -53,17 +50,9 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
             System.exit(0);
         });
 
-
-//        itemCreditos.setOnAction((e) -> {
-//            panePrincipal.setCenter(creditoBoundary.render());
-//        });
-//
-//        itemComoUsar.setOnAction((e) -> {
-//            panePrincipal.setCenter(comoUsarBoundary.render());
-//        });
-
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
+        menuCadastros.getItems().add(itemCadastroFunc);
         menuAgendamento.getItems().add(itemAgendamento);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);
@@ -71,12 +60,11 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         itemCadastro.setOnAction(this);
         itemAgendamento.setOnAction(this);
         itemCreditos.setOnAction(this);
-
+        itemCadastroFunc.setOnAction(this);
 
         menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda);
 
         panePrincipal.setTop(menuPrincipal);
-//        panePrincipal.setCenter(cb.render());
 
         stage.setScene(scn);
         stage.setTitle("Gestão Academia Javeiros");
