@@ -19,16 +19,14 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
     private BorderPane panePrincipal = new BorderPane();
 
-//    private ClienteBoundary cb = new ClienteBoundary();
 
-//    private CreditoBoundary creditoBoundary = new CreditoBoundary();
-    private ComoUsarBoundary comoUsarBoundary = new ComoUsarBoundary();
     Map<String, StrategyBoundary> telas = new HashMap<>();
 
     public PrincipalBoundary() {
         telas.put("Criar/Consultar Cliente", new ClienteBoundary());
         telas.put("Créditos", new CreditoBoundary());
         telas.put("Agendamento Aulas", new AgendamentoBoundary());
+        telas.put("Criar/Consultar Funcionário", new FuncionarioBoundary());
     }
 
     @Override
@@ -45,6 +43,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         MenuItem itemSair = new MenuItem("Sair");
         MenuItem itemCadastro = new MenuItem("Criar/Consultar Cliente");
         MenuItem itemTreino = new MenuItem("Criar/Consultar Treinos");
+        MenuItem itemCadastroFunc = new MenuItem("Criar/Consultar Funcionário");
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
@@ -66,6 +65,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
         menuCadastros.getItems().add(itemTreino);
+        menuCadastros.getItems().add(itemCadastroFunc);
         menuAgendamento.getItems().add(itemAgendamento);
         menuAjuda.getItems().add(itemCreditos);
         menuAjuda.getItems().add(itemComoUsar);
@@ -73,6 +73,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         itemCadastro.setOnAction(this);
         itemAgendamento.setOnAction(this);
         itemCreditos.setOnAction(this);
+        itemCadastroFunc.setOnAction(this);
 
 
         menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda);
