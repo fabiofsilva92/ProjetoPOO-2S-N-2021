@@ -25,7 +25,6 @@ public class AgendamentoDAOImplements implements AgendamentoDAO {
 
     @Override
     public void adicionar(Agendamento a) {
-        System.out.println("Cheguei aqui");
 
         try {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);

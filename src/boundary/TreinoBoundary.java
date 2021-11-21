@@ -1,11 +1,16 @@
 package boundary;
 
+import control.TreinoControl;
 import entity.Treino;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.converter.NumberStringConverter;
 
 public class TreinoBoundary implements StrategyBoundary {
 
@@ -22,7 +27,7 @@ public class TreinoBoundary implements StrategyBoundary {
     private Button btnPesquisar = new Button("Pesquisar Aluno");
     private Button btnLimpar = new Button("Limpar");
 
-//    private TreinoControl control = new TreinoControl(); //Composição
+    private TreinoControl control = new TreinoControl(); //Composição
 
     private TableView<Treino> table1 = new TableView<>();
     private TableView<Treino> table2 = new TableView<>();
@@ -102,6 +107,68 @@ public class TreinoBoundary implements StrategyBoundary {
 
     @Override
     public Pane render() {
-        return null;
+
+        BorderPane panPrincipal = new BorderPane();
+        GridPane panCampos = new GridPane();
+
+        Bindings.bindBidirectional(txtID.textProperty(), control.id, new NumberStringConverter());
+        Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
+        Bindings.bindBidirectional(txtSobreNome.textProperty(), control.sobreNome);
+        Bindings.bindBidirectional(cmbTipo.valueProperty(), control.tipo);
+        Bindings.bindBidirectional(txtMusculo.textProperty(), control.musculo);
+        Bindings.bindBidirectional(txtAparelho.textProperty(), control.aparelho, new NumberStringConverter());
+        Bindings.bindBidirectional(txtRepeticoes.textProperty(), control.repeticoes, new NumberStringConverter());
+        Bindings.bindBidirectional(txtSeries.textProperty(), control.series, new NumberStringConverter());
+
+
+        panCampos.add(new Label("Id"), 0, 0);
+        panCampos.add(txtID, 1, 0);
+        panCampos.add(btnLimpar, 0, 3);
+        panCampos.add(btnPesquisar, 1, 3);
+
+        panCampos.add(new Label("Nome"), 0, 1);
+        panCampos.add(txtNome, 1, 1);
+
+        panCampos.add(new Label("Sobre Nome"), 0, 2);
+        panCampos.add(txtSobreNome, 1, 2);
+
+        panCampos.add(new Label("Tipo do Treino"), 4, 0);
+        panCampos.add(cmbTipo, 5, 0);
+
+        panCampos.add(new Label("Categoria Másculo"), 4, 1);
+        panCampos.add(txtMusculo, 5, 1);
+
+        panCampos.add(new Label("Aparelho"), 4, 2);
+        panCampos.add(txtAparelho, 5, 2);
+
+        panCampos.add(new Label("repetições"), 4, 3);
+        panCampos.add(txtRepeticoes, 5, 3);
+
+        panCampos.add(new Label("Series"), 4, 4);
+        panCampos.add(txtSeries, 5, 4);
+
+        panCampos.add(btnAdicionar, 4, 5);
+
+
+
+        btnAdicionar.setOnAction(e -> {
+            control.salvar();
+        });
+
+        btnPesquisar.setOnAction(e -> {
+            control.pesquisar();
+        });
+
+        btnLimpar.setOnAction(e -> {
+            control.limpar();
+        });
+
+
+        panPrincipal.setTop(panCampos);
+        panPrincipal.setCenter(table1);
+        panPrincipal.setBottom(table2);
+        this.criarTabela();
+
+        return (panPrincipal);
     }
 }

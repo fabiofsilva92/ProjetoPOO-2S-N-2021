@@ -7,14 +7,14 @@ import javafx.collections.ObservableList;
 
 public class TreinoControl {
 
-    LongProperty id = new SimpleLongProperty(0);
-    StringProperty nome = new SimpleStringProperty("");
-    StringProperty sobreNome = new SimpleStringProperty("");
-    StringProperty tipo = new SimpleStringProperty("");
-    StringProperty musculo = new SimpleStringProperty("");
-    IntegerProperty aparelho = new SimpleIntegerProperty(0);
-    IntegerProperty repeticoes = new SimpleIntegerProperty(0);
-    IntegerProperty series = new SimpleIntegerProperty(0);
+    public LongProperty id = new SimpleLongProperty(0);
+    public StringProperty nome = new SimpleStringProperty("");
+    public StringProperty sobreNome = new SimpleStringProperty("");
+    public StringProperty tipo = new SimpleStringProperty("");
+    public StringProperty musculo = new SimpleStringProperty("");
+    public IntegerProperty aparelho = new SimpleIntegerProperty(0);
+    public IntegerProperty repeticoes = new SimpleIntegerProperty(0);
+    public IntegerProperty series = new SimpleIntegerProperty(0);
 
 //    private TreinoDAO treinoDAO = new treinoDAOImplement();
 
@@ -46,24 +46,24 @@ public class TreinoControl {
         series.set(t.getSeries());
     }
 
-    public void novoTreino() {
+    public void limpar() {
         Treino t = new Treino();
         t.setId(0L);
         setEntity(t);
     }
 
     public void salvar() {
-        Treino t = getEntity();
-//
-//        if (t.getId() == 0) {
-//            treinoDAO.adicionar(t);
-//            setEntity(new Treino());
+        Treino p = getEntity();
+
+
+//        if (p.getId() == 0) {
+//            petDAO.adicionar(p);
+//            setEntity(new PetTradicional());
 //        } else {
-//            treinoDAO.atualizar(id.get(), t);
+//            petDAO.atualizar(id.get(), p);
 //        }
 
-//        atualizarListaView();
-
+        atualizarListaView();
     }
 
     public void pesquisar() {
