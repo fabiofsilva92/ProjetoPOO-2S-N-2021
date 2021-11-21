@@ -1,9 +1,13 @@
 package control;
 
+import DAO.TreinoDAO;
+import conexaoDAO.TreinoDAOImplements;
 import entity.Treino;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class TreinoControl {
 
@@ -16,7 +20,7 @@ public class TreinoControl {
     public IntegerProperty repeticoes = new SimpleIntegerProperty(0);
     public IntegerProperty series = new SimpleIntegerProperty(0);
 
-//    private TreinoDAO treinoDAO = new treinoDAOImplement();
+    private TreinoDAO treinoDAO = new TreinoDAOImplements();
 
     private ObservableList<Treino> listaView = FXCollections.observableArrayList();
 
@@ -36,6 +40,7 @@ public class TreinoControl {
     }
 
     public void setEntity(Treino t) {
+        System.out.println("null pointer ? " + t.getId());
         id.set(t.getId());
         nome.set(t.getNome());
         sobreNome.set(t.getsobreNome());
@@ -53,24 +58,25 @@ public class TreinoControl {
     }
 
     public void salvar() {
-        Treino p = getEntity();
+        Treino t = getEntity();
 
+        System.out.println("Salvar " + t.getId());
 
-//        if (p.getId() == 0) {
-//            petDAO.adicionar(p);
-//            setEntity(new PetTradicional());
-//        } else {
-//            petDAO.atualizar(id.get(), p);
-//        }
+        if (t.getId() == 0) {
+            treinoDAO.adicionar(t);
+            setEntity(new Treino());
+        } else {
+            treinoDAO.atualizar(id.get(), t);
+        }
 
         atualizarListaView();
     }
 
     public void pesquisar() {
-//        listaView.clear();
-//
-//        List<Treino> encontrados = treinoDAO.pesquisarPorNome(nome.get());
-//        listaView.addAll(encontrados);
+        listaView.clear();
+
+        List<Treino> encontrados = treinoDAO.pesquisarPorNome(nome.get());
+        listaView.addAll(encontrados);
     }
 
     public ObservableList<Treino> getLista() {
@@ -78,14 +84,14 @@ public class TreinoControl {
     }
 
     public void remover(long id) {
-//        treinoDAO.remover(id);
-//        atualizarListaView();
+        treinoDAO.remover(id);
+        atualizarListaView();
     }
 
     //
     public void atualizarListaView() {
-//        listaView.clear();
-//        listaView.addAll(treinoDAO.pesquisarPorNome(""));
+        listaView.clear();
+        listaView.addAll(treinoDAO.pesquisarPorNome(""));
     }
 
 }

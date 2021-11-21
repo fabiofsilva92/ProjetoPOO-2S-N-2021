@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.NumberStringConverter;
 
+import java.util.Optional;
+
 public class TreinoBoundary implements StrategyBoundary {
 
     private TextField txtID = new TextField();
@@ -63,45 +65,45 @@ public class TreinoBoundary implements StrategyBoundary {
         TableColumn<Treino, Double> col8 = new TableColumn<>("Series");
         col4.setCellValueFactory(new PropertyValueFactory<>("series"));
 
-//
-//        TableColumn<Treino, String> col9 = new TableColumn<>("Ações");
-//        col6.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
-//        col6.setCellFactory((tbcol) -> new TableCell<Treino, String>() {
-//            final Button btn = new Button("Remover");
-//
-//            public void updateItem(String item, boolean empty) {
-//                if (empty) {
-//                    setGraphic(null);
-//                    setText(null);
-//                } else {
-//                    btn.setOnAction((e) -> {
-//                        Treino p = getTableView().getItems().get(getIndex());
-//                        Alert alert = new Alert(Alert.AlertType.WARNING, "Você confirma a remoção " +
-//                                p.getId() + " ?", ButtonType.OK, ButtonType.CANCEL);
-//                        Optional<ButtonType> clicado = alert.showAndWait();
-//                        if (clicado.isPresent() && clicado.get().equals(ButtonType.OK)) {
-//                            control.remover(p.getId())
-//                            ;
-//                        }
-//                    });
-//                    setGraphic(btn);
-//                    setText(null);
-//                }
-//            }
-//        });
+
+        TableColumn<Treino, String> col9 = new TableColumn<>("Ações");
+        col9.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        col9.setCellFactory((tbcol) -> new TableCell<Treino, String>() {
+            final Button btn = new Button("Remover");
+
+            public void updateItem(String item, boolean empty) {
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    btn.setOnAction((e) -> {
+                        Treino p = getTableView().getItems().get(getIndex());
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Você confirma a remoção " +
+                                p.getId() + " ?", ButtonType.OK, ButtonType.CANCEL);
+                        Optional<ButtonType> clicado = alert.showAndWait();
+                        if (clicado.isPresent() && clicado.get().equals(ButtonType.OK)) {
+                            control.remover(p.getId())
+                            ;
+                        }
+                    });
+                    setGraphic(btn);
+                    setText(null);
+                }
+            }
+        });
 
         table1.getColumns().addAll(col1, col2, col3);
-        table2.getColumns().addAll(col4, col5, col6, col7, col8);
+        table2.getColumns().addAll(col4, col5, col6, col7, col8, col9);
 
-//        table1.setItems(control.getLista());
+        table1.setItems(control.getLista());
 
-//        table1.getSelectionModel().selectedItemProperty().addListener(
-//                (obs, antigo, novo) -> {
-//                    if (novo != null) {
-//                        control.setEntity(novo);
-//                    }
-//                }
-//        );
+        table1.getSelectionModel().selectedItemProperty().addListener(
+                (obs, antigo, novo) -> {
+                    if (novo != null) {
+                        control.setEntity(novo);
+                    }
+                }
+        );
     }
 
 
@@ -110,6 +112,9 @@ public class TreinoBoundary implements StrategyBoundary {
 
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
+
+        txtID.setEditable(false);
+        txtID.setDisable(true);
 
         Bindings.bindBidirectional(txtID.textProperty(), control.id, new NumberStringConverter());
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
@@ -148,7 +153,6 @@ public class TreinoBoundary implements StrategyBoundary {
         panCampos.add(txtSeries, 5, 4);
 
         panCampos.add(btnAdicionar, 4, 5);
-
 
 
         btnAdicionar.setOnAction(e -> {
