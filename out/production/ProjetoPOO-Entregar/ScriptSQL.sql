@@ -73,3 +73,12 @@ create table equipamento(
    preco double
 
    );
+
+CREATE TABLE cliente
+(id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(20) NOT NULL,
+sobrenome VARCHAR(30) NOT NULL,
+cpf VARCHAR(20) NOT NULL,
+dataNascimento DATE,
+telefone VARCHAR(20),
+sexo VARCHAR(10));

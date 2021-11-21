@@ -18,7 +18,7 @@ public class TreinoBoundary implements StrategyBoundary {
 
     private TextField txtID = new TextField();
     private TextField txtNome = new TextField();
-    private TextField txtSobreNome = new TextField();
+    private TextField txtSobrenome = new TextField();
     private ComboBox<String> cmbTipo = new ComboBox<>();
     private TextField txtMusculo = new TextField();
     private TextField txtAparelho = new TextField();
@@ -48,7 +48,7 @@ public class TreinoBoundary implements StrategyBoundary {
         col2.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
         TableColumn<Treino, String> col3 = new TableColumn<>("Sobre Nome");
-        col3.setCellValueFactory(new PropertyValueFactory<>("sobreNome"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("sobrenome"));
 
         TableColumn<Treino, Double> col4 = new TableColumn<>("Tipo");
         col4.setCellValueFactory(new PropertyValueFactory<>("tipo"));
@@ -118,7 +118,7 @@ public class TreinoBoundary implements StrategyBoundary {
 
         Bindings.bindBidirectional(txtID.textProperty(), control.id, new NumberStringConverter());
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
-        Bindings.bindBidirectional(txtSobreNome.textProperty(), control.sobreNome);
+        Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
         Bindings.bindBidirectional(cmbTipo.valueProperty(), control.tipo);
         Bindings.bindBidirectional(txtMusculo.textProperty(), control.musculo);
         Bindings.bindBidirectional(txtAparelho.textProperty(), control.aparelho, new NumberStringConverter());
@@ -135,7 +135,7 @@ public class TreinoBoundary implements StrategyBoundary {
         panCampos.add(txtNome, 1, 1);
 
         panCampos.add(new Label("Sobre Nome"), 0, 2);
-        panCampos.add(txtSobreNome, 1, 2);
+        panCampos.add(txtSobrenome, 1, 2);
 
         panCampos.add(new Label("Tipo do Treino"), 4, 0);
         panCampos.add(cmbTipo, 5, 0);

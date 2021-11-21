@@ -13,7 +13,7 @@ public class TreinoControl {
 
     public LongProperty id = new SimpleLongProperty(0);
     public StringProperty nome = new SimpleStringProperty("");
-    public StringProperty sobreNome = new SimpleStringProperty("");
+    public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty tipo = new SimpleStringProperty("");
     public StringProperty musculo = new SimpleStringProperty("");
     public IntegerProperty aparelho = new SimpleIntegerProperty(0);
@@ -29,7 +29,7 @@ public class TreinoControl {
         Treino t = new Treino();
         t.setId(id.get());
         t.setNome(nome.get());
-        t.setsobreNome(sobreNome.get());
+        t.setsobrenome(sobrenome.get());
         t.setTipo(tipo.get());
         t.setMusculo(musculo.get());
         t.setAparelho(aparelho.get());
@@ -43,7 +43,7 @@ public class TreinoControl {
         System.out.println("null pointer ? " + t.getId());
         id.set(t.getId());
         nome.set(t.getNome());
-        sobreNome.set(t.getsobreNome());
+        sobrenome.set(t.getsobrenome());
         tipo.set(t.getTipo());
         musculo.set(t.getMusculo());
         aparelho.set(t.getAparelho());

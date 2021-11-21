@@ -4,7 +4,7 @@ public class Treino {
 
     private Long id;
     private String nome;
-    private String sobreNome;
+    private String sobrenome;
     private String tipo;
     private String musculo;
     private int aparelho;
@@ -27,12 +27,12 @@ public class Treino {
         this.nome = nome;
     }
 
-    public String getsobreNome() {
-        return sobreNome;
+    public String getsobrenome() {
+        return sobrenome;
     }
 
-    public void setsobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
+    public void setsobrenome(String sobreNome) {
+        this.sobrenome = sobreNome;
     }
 
     public String getTipo() {

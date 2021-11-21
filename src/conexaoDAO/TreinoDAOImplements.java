@@ -36,7 +36,7 @@ public class TreinoDAOImplements implements TreinoDAO {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, t.getId());
             stmt.setString(2, t.getNome());
-            stmt.setString(3, t.getsobreNome());
+            stmt.setString(3, t.getsobrenome());
             stmt.setString(4, t.getTipo());
             System.out.println("Esta Chegando isto " + t.getTipo());
             stmt.setString(5, t.getMusculo());
@@ -56,7 +56,7 @@ public class TreinoDAOImplements implements TreinoDAO {
         List<Treino> listaEncontrados = new ArrayList<>();
         try {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-            String sql = "SELECT * FROM agendamento WHERE nome LIKE '%" + nome + "%'";
+            String sql = "SELECT * FROM cliente WHERE nome LIKE '%" + nome + "%'";
             System.out.println(sql);
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -67,7 +67,7 @@ public class TreinoDAOImplements implements TreinoDAO {
 
                 t.setId(rs.getLong("id"));
                 t.setNome(rs.getString("nome"));
-                t.setsobreNome(rs.getString("sobreNome"));
+                t.setsobrenome(rs.getString("sobrenome"));
 
                 System.out.println("Pesquisar " + rs.getString("nome"));
 

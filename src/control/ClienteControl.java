@@ -1,5 +1,7 @@
 package control;
 
+import DAO.ClienteDAO;
+import conexaoDAO.ClienteDAOImplements;
 import entity.Cliente;
 import entity.Telefone;
 import javafx.beans.property.*;
@@ -13,21 +15,20 @@ import java.util.List;
 public class ClienteControl {
 
 
-
     public LongProperty id = new SimpleLongProperty(0);
     public StringProperty nome = new SimpleStringProperty("");
     public StringProperty sobrenome = new SimpleStringProperty("");
     public StringProperty cpf = new SimpleStringProperty("");
     public ObjectProperty dataNascimento = new SimpleObjectProperty(LocalDate.now());
-//    public IntegerProperty ddd = new SimpleIntegerProperty(0);
+    //    public IntegerProperty ddd = new SimpleIntegerProperty(0);
     public StringProperty numTelefone = new SimpleStringProperty("11-99999-9999");
     public StringProperty sexo = new SimpleStringProperty("");
 
-
+    private ClienteDAO clienteDAO = new ClienteDAOImplements();
     private ObservableList<Cliente> listaView = FXCollections.observableArrayList();
     private List<Cliente> listaCliente = new ArrayList<>();
 
-    public Cliente getEntity(){
+    public Cliente getEntity() {
         Cliente c = new Cliente();
         c.setId(id.get());
         c.setNome(nome.get());
@@ -53,6 +54,14 @@ public class ClienteControl {
 
     public void salvar() {
         Cliente c = getEntity();
+
+        if (c.getId() == 0) {
+            clienteDAO.adicionar(c);
+            setEntity(new Cliente());
+        } else {
+            clienteDAO.atualizar(id.get(), c);
+        }
+
         listaCliente.add(c);
         atualizarListaView();
     }
@@ -60,6 +69,7 @@ public class ClienteControl {
     private void atualizarListaView() {
         listaView.clear();
         listaView.addAll(listaCliente);
+        listaView.addAll(clienteDAO.pesquisarPorNome(""));
     }
 
     public void remover(Cliente cliente) {
@@ -74,8 +84,8 @@ public class ClienteControl {
 
     public void pesquisar() {
         listaView.clear();
-        for(Cliente cliente : listaCliente){
-            if(cliente.getNome().contains(nome.get())){
+        for (Cliente cliente : listaCliente) {
+            if (cliente.getNome().contains(nome.get())) {
                 listaView.add(cliente);
             }
         }
