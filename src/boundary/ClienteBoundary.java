@@ -3,6 +3,7 @@ package boundary;
 import control.ClienteControl;
 import entity.Cliente;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -114,6 +115,10 @@ public class ClienteBoundary implements StrategyBoundary{
 
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
+
+        panCampos.setHgap(5); //horizontal gap in pixels => that's what you are asking for
+        panCampos.setVgap(5); //vertical gap in pixels
+        panCampos.setPadding(new Insets(5, 5, 5, 5));
 
         txtId.setEditable(false);
         txtId.setDisable(true);

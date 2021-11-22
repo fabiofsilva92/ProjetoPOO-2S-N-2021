@@ -5,6 +5,7 @@ import entity.Treino;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -123,6 +124,10 @@ public class TreinoBoundary implements StrategyBoundary {
 
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
+
+        panCampos.setHgap(5); //horizontal gap in pixels => that's what you are asking for
+        panCampos.setVgap(5); //vertical gap in pixels
+        panCampos.setPadding(new Insets(5, 5, 5, 5));
 //        txtID.setEditable(false);
 //        txtID.setDisable(true);
 

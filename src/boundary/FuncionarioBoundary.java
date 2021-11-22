@@ -7,6 +7,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -144,6 +145,10 @@ public class FuncionarioBoundary implements StrategyBoundary {
     public Pane render() {
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
+
+        panCampos.setHgap(5); //horizontal gap in pixels => that's what you are asking for
+        panCampos.setVgap(5); //vertical gap in pixels
+        panCampos.setPadding(new Insets(5, 5, 5, 5));
 
         txtId.setEditable(false);
         txtId.setDisable(true);
