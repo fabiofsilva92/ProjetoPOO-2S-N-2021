@@ -17,23 +17,15 @@ create table agendamento(
 
 
 create table treino(
-   id int primary key not null,
-
+   id int  not null,
    nome varchar(30) not null,
-
-   sobreNome varchar(30),
-
+   sobrenome varchar(30),
    tipo varchar(1) not null,
-
    musculo varchar(30),
-
    aparelho int,
-
    repeticoesQTD int,
-
    series int
    );
-
 
 
 create table funcionario(

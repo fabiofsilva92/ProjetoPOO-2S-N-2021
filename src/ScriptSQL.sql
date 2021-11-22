@@ -17,7 +17,7 @@ create table agendamento(
 
 
 create table treino(
-   id int primary key not null,
+   id int  not null,
    nome varchar(30) not null,
    sobrenome varchar(30),
    tipo varchar(1) not null,

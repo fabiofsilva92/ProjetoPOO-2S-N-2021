@@ -23,27 +23,28 @@ public class TreinoControl {
     private TreinoDAO treinoDAO = new TreinoDAOImplements();
 
     private ObservableList<Treino> listaView = FXCollections.observableArrayList();
+    private ObservableList<Treino> listaView2 = FXCollections.observableArrayList();
 
 
     public Treino getEntity() {
         Treino t = new Treino();
         t.setId(id.get());
         t.setNome(nome.get());
-        t.setsobrenome(sobrenome.get());
+        t.setSobrenome(sobrenome.get());
         t.setTipo(tipo.get());
         t.setMusculo(musculo.get());
         t.setAparelho(aparelho.get());
         t.setRepeticoes(repeticoes.get());
         t.setSeries(series.get());
 
+        System.out.println("GetEntity" + t.getSobrenome());
         return t;
     }
 
     public void setEntity(Treino t) {
-        System.out.println("null pointer ? " + t.getId());
         id.set(t.getId());
         nome.set(t.getNome());
-        sobrenome.set(t.getsobrenome());
+        sobrenome.set(t.getSobrenome());
         tipo.set(t.getTipo());
         musculo.set(t.getMusculo());
         aparelho.set(t.getAparelho());
@@ -60,12 +61,12 @@ public class TreinoControl {
     public void salvar() {
         Treino t = getEntity();
 
-        System.out.println("Salvar " + t.getId());
+        System.out.println("Salvar Treino " + t.getId());
 
-        if (t.getId() == 0) {
+        if (t.getId() != 0) {
             treinoDAO.adicionar(t);
-            setEntity(new Treino());
-        } else {
+//            setEntity(new Treino());
+//        } else {
             treinoDAO.atualizar(id.get(), t);
         }
 
@@ -74,13 +75,25 @@ public class TreinoControl {
 
     public void pesquisar() {
         listaView.clear();
-
         List<Treino> encontrados = treinoDAO.pesquisarPorNome(nome.get());
         listaView.addAll(encontrados);
     }
 
+    public void pesquisarTreino() {
+        if (id.get() != 0) {
+            listaView2.clear();
+            List<Treino> encontrados2 = treinoDAO.pesquisarPorId(id.get());
+            listaView2.addAll(encontrados2);
+        }
+
+    }
+
     public ObservableList<Treino> getLista() {
         return listaView;
+    }
+
+    public ObservableList<Treino> getLista2() {
+        return listaView2;
     }
 
     public void remover(long id) {
@@ -92,6 +105,9 @@ public class TreinoControl {
     public void atualizarListaView() {
         listaView.clear();
         listaView.addAll(treinoDAO.pesquisarPorNome(""));
+
+        listaView2.clear();
+        listaView2.addAll(treinoDAO.pesquisarPorId(id.get()));
     }
 
 }

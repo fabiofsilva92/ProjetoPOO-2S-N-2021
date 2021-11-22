@@ -15,6 +15,14 @@ public class Treino {
         return id;
     }
 
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -25,14 +33,6 @@ public class Treino {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getsobrenome() {
-        return sobrenome;
-    }
-
-    public void setsobrenome(String sobreNome) {
-        this.sobrenome = sobreNome;
     }
 
     public String getTipo() {

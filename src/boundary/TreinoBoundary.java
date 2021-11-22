@@ -26,6 +26,7 @@ public class TreinoBoundary implements StrategyBoundary {
     private TextField txtSeries = new TextField();
 
     private Button btnAdicionar = new Button("Salvar Treino");
+    private Button btnPesquisarTreino = new Button("Pesquisar Treino");
     private Button btnPesquisar = new Button("Pesquisar Aluno");
     private Button btnLimpar = new Button("Limpar");
 
@@ -47,23 +48,23 @@ public class TreinoBoundary implements StrategyBoundary {
         TableColumn<Treino, String> col2 = new TableColumn<>("Nome");
         col2.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-        TableColumn<Treino, String> col3 = new TableColumn<>("Sobre Nome");
+        TableColumn<Treino, String> col3 = new TableColumn<>("Sobrenome");
         col3.setCellValueFactory(new PropertyValueFactory<>("sobrenome"));
 
         TableColumn<Treino, Double> col4 = new TableColumn<>("Tipo");
         col4.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 
         TableColumn<Treino, Double> col5 = new TableColumn<>("Músculo");
-        col4.setCellValueFactory(new PropertyValueFactory<>("musculo"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("musculo"));
 
         TableColumn<Treino, Double> col6 = new TableColumn<>("Aparelho");
-        col4.setCellValueFactory(new PropertyValueFactory<>("aparelho"));
+        col6.setCellValueFactory(new PropertyValueFactory<>("aparelho"));
 
         TableColumn<Treino, Double> col7 = new TableColumn<>("Repetições");
-        col4.setCellValueFactory(new PropertyValueFactory<>("repeticoesQTD"));
+        col7.setCellValueFactory(new PropertyValueFactory<>("repeticoes"));
 
         TableColumn<Treino, Double> col8 = new TableColumn<>("Series");
-        col4.setCellValueFactory(new PropertyValueFactory<>("series"));
+        col8.setCellValueFactory(new PropertyValueFactory<>("series"));
 
 
         TableColumn<Treino, String> col9 = new TableColumn<>("Ações");
@@ -93,11 +94,21 @@ public class TreinoBoundary implements StrategyBoundary {
         });
 
         table1.getColumns().addAll(col1, col2, col3);
-        table2.getColumns().addAll(col4, col5, col6, col7, col8, col9);
+        table2.getColumns().addAll(col1, col4, col5, col6, col7, col8, col9);
 
         table1.setItems(control.getLista());
 
         table1.getSelectionModel().selectedItemProperty().addListener(
+                (obs, antigo, novo) -> {
+                    if (novo != null) {
+                        control.setEntity(novo);
+                    }
+                }
+        );
+
+        table2.setItems(control.getLista2());
+
+        table2.getSelectionModel().selectedItemProperty().addListener(
                 (obs, antigo, novo) -> {
                     if (novo != null) {
                         control.setEntity(novo);
@@ -112,9 +123,8 @@ public class TreinoBoundary implements StrategyBoundary {
 
         BorderPane panPrincipal = new BorderPane();
         GridPane panCampos = new GridPane();
-
-        txtID.setEditable(false);
-        txtID.setDisable(true);
+//        txtID.setEditable(false);
+//        txtID.setDisable(true);
 
         Bindings.bindBidirectional(txtID.textProperty(), control.id, new NumberStringConverter());
         Bindings.bindBidirectional(txtNome.textProperty(), control.nome);
@@ -134,7 +144,7 @@ public class TreinoBoundary implements StrategyBoundary {
         panCampos.add(new Label("Nome"), 0, 1);
         panCampos.add(txtNome, 1, 1);
 
-        panCampos.add(new Label("Sobre Nome"), 0, 2);
+        panCampos.add(new Label("Sobrenome"), 0, 2);
         panCampos.add(txtSobrenome, 1, 2);
 
         panCampos.add(new Label("Tipo do Treino"), 4, 0);
@@ -152,7 +162,8 @@ public class TreinoBoundary implements StrategyBoundary {
         panCampos.add(new Label("Series"), 4, 4);
         panCampos.add(txtSeries, 5, 4);
 
-        panCampos.add(btnAdicionar, 4, 5);
+        panCampos.add(btnAdicionar, 5, 5);
+        panCampos.add(btnPesquisarTreino, 4, 5);
 
 
         btnAdicionar.setOnAction(e -> {
@@ -161,6 +172,10 @@ public class TreinoBoundary implements StrategyBoundary {
 
         btnPesquisar.setOnAction(e -> {
             control.pesquisar();
+        });
+
+        btnPesquisarTreino.setOnAction(e -> {
+            control.pesquisarTreino();
         });
 
         btnLimpar.setOnAction(e -> {
