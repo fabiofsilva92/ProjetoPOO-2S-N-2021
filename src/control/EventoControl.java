@@ -13,10 +13,11 @@ public class EventoControl {
 
     EventoDAOImplements eventoDAO = new EventoDAOImplements();
 
-    LongProperty id = new SimpleLongProperty(0);
-    StringProperty nome = new SimpleStringProperty("");
-    ObjectProperty data = new SimpleObjectProperty(LocalDate.now());
-    StringProperty horario = new SimpleStringProperty("");
+    public LongProperty id = new SimpleLongProperty(0);
+    public StringProperty nome = new SimpleStringProperty("");
+    public ObjectProperty data = new SimpleObjectProperty(LocalDate.now());
+    public StringProperty horario = new SimpleStringProperty("");
+    public DoubleProperty duracao = new SimpleDoubleProperty(0d);
 
     private ObservableList<Evento> listaView = FXCollections.observableArrayList();
 
@@ -26,6 +27,7 @@ public class EventoControl {
         e.setNomeEvento(nome.get());
         e.setData((LocalDate) data.get());
         e.setHorario(horario.get());
+        e.setDuracao(duracao.get());
 
         return e;
     }
@@ -36,6 +38,7 @@ public class EventoControl {
         nome.set(e.getNomeEvento());
         data.set(e.getData());
         horario.set(e.getHorario());
+        duracao.set(e.getDuracao());
 
     }
 

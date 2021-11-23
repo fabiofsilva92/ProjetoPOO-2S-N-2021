@@ -29,6 +29,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         telas.put("Criar/Consultar Funcionário", new FuncionarioBoundary());
         telas.put("Criar/Consultar Equipamentos", new EquipamentoBoundary());
         telas.put("Criar/Consultar Treino", new TreinoBoundary());
+        telas.put("Criar / Consultar Evento", new EventoBoundary());
     }
 
     @Override
@@ -41,6 +42,8 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         Menu menuCadastros = new Menu("Cliente");
         Menu menuAjuda = new Menu("Ajuda");
         Menu menuAgendamento = new Menu("Agendamento Aulas");
+        Menu menuEvento = new Menu("Eventos");
+
 
         MenuItem itemSair = new MenuItem("Sair");
         MenuItem itemCadastro = new MenuItem("Criar/Consultar Cliente");
@@ -50,6 +53,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
+        MenuItem itemEvento = new MenuItem("Criar / Consultar Evento");
 
         itemSair.setOnAction(e -> {
             Platform.exit();
@@ -57,6 +61,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         });
 
 
+        menuEvento.getItems().add(itemEvento);
         menuArquivo.getItems().add(itemSair);
         menuCadastros.getItems().add(itemCadastro);
         menuCadastros.getItems().add(itemTreino);
@@ -72,9 +77,10 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         itemCadastroFunc.setOnAction(this);
         itemCadastroEquip.setOnAction(this);
         itemTreino.setOnAction(this);
+        itemEvento.setOnAction(this);
 
 
-        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda);
+        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda, menuEvento);
 
         panePrincipal.setTop(menuPrincipal);
 

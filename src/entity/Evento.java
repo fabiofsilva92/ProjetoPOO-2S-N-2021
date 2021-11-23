@@ -8,6 +8,7 @@ public class Evento {
     private String nomeEvento = "";
     private LocalDate data = LocalDate.now();;
     private String horario = "";
+    private Double duracao = 0d;
 
     public long getId() {
         return id;
@@ -39,5 +40,13 @@ public class Evento {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public Double getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Double duracao) {
+        this.duracao = duracao;
     }
 }

@@ -29,14 +29,15 @@ public class EventoDAOImplements implements EventoDAO {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 
             String sql =
-                    "INSERT INTO evento(id, nomeEvento, data, horario)" +
-                            "VALUES(?, ?, ?, ?)";
+                    "INSERT INTO evento(id, nomeEvento, data, horario, duracao)" +
+                            "VALUES(?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, e.getId());
             stmt.setString(2, e.getNomeEvento());
             stmt.setDate(3, Date.valueOf(e.getData()));
             stmt.setString(4, e.getHorario());
+            stmt.setDouble(5, e.getDuracao());
 
             stmt.executeUpdate();
             con.close();
@@ -66,6 +67,7 @@ public class EventoDAOImplements implements EventoDAO {
                 e.setNomeEvento(rs.getString("nomeEvento"));
                 e.setData(rs.getDate("data").toLocalDate());
                 e.setHorario(rs.getString("horario"));
+                e.setDuracao(rs.getDouble("duracao"));
 
                 encontrados.add(e);
             }
