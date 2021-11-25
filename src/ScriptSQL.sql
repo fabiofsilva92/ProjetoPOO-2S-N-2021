@@ -74,3 +74,16 @@ cpf VARCHAR(20) NOT NULL,
 dataNascimento DATE,
 telefone VARCHAR(20),
 sexo VARCHAR(10));
+
+create table evento(
+   id int auto_increment not null primary key,
+
+   nomeEvento varchar(30) not null,
+
+   data date,
+
+   horario varchar(10),
+
+   duracao double
+
+   );

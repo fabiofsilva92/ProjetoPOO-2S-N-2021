@@ -129,6 +129,9 @@ public class EventoBoundary implements StrategyBoundary{
         panCampos.add(new Label("Duração"), 0 , 4);
         panCampos.add(txtDuracao, 1, 4);
 
+        panCampos.add(btnSalvar, 0, 5);
+        panCampos.add(btnPeqsuisar, 1, 5);
+
         btnSalvar.setOnAction(e -> {
             control.salvar();
         });
