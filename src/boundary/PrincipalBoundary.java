@@ -29,7 +29,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         telas.put("Criar/Consultar Funcionário", new FuncionarioBoundary());
         telas.put("Criar/Consultar Equipamentos", new EquipamentoBoundary());
         telas.put("Criar/Consultar Treino", new TreinoBoundary());
-        telas.put("Criar / Consultar Evento", new EventoBoundary());
+        telas.put("Criar/Consultar Evento", new EventoBoundary());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
 
         MenuBar menuPrincipal = new MenuBar();
         Menu menuArquivo = new Menu("Arquivos");
-        Menu menuCadastros = new Menu("Cliente");
+        Menu menuCadastros = new Menu("Cadastros");
         Menu menuAjuda = new Menu("Ajuda");
         Menu menuAgendamento = new Menu("Agendamento Aulas");
         Menu menuEvento = new Menu("Eventos");
@@ -53,7 +53,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         MenuItem itemCreditos = new MenuItem("Créditos");
         MenuItem itemAgendamento = new MenuItem("Agendamento Aulas");
         MenuItem itemComoUsar = new MenuItem("Como Usar?");
-        MenuItem itemEvento = new MenuItem("Criar / Consultar Evento");
+        MenuItem itemEvento = new MenuItem("Criar/Consultar Evento");
 
         itemSair.setOnAction(e -> {
             Platform.exit();
@@ -80,7 +80,7 @@ public class PrincipalBoundary extends Application implements EventHandler<Actio
         itemEvento.setOnAction(this);
 
 
-        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuAjuda, menuEvento);
+        menuPrincipal.getMenus().addAll(menuArquivo, menuCadastros, menuAgendamento, menuEvento, menuAjuda);
 
         panePrincipal.setTop(menuPrincipal);
 
