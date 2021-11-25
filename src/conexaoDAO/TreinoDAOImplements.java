@@ -11,7 +11,7 @@ public class TreinoDAOImplements implements TreinoDAO {
 
     private static final String DBURL = "jdbc:mariadb://localhost/POO_ACADEMIA";
     private static final String DBUSER = "root";
-    private static final String DBPASS = "";
+    private static final String DBPASS = "123456";
 
 
     public TreinoDAOImplements() {

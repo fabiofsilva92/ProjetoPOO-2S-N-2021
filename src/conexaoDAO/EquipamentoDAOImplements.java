@@ -13,7 +13,7 @@ public class EquipamentoDAOImplements implements EquipamentoDAO {
 
     private static final String DBURL = "jdbc:mariadb://localhost:3306/POO_ACADEMIA";
     private static final String DBUSER = "root";
-    private static final String DBPASS = "";
+    private static final String DBPASS = "123456";
 
     public EquipamentoDAOImplements() {
         try {

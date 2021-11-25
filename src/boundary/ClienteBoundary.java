@@ -63,15 +63,15 @@ public class ClienteBoundary implements StrategyBoundary{
 //        TableColumn<Cliente, String> col6 = new TableColumn<>("DDD");
 //        col6.setCellValueFactory(new PropertyValueFactory<>("ddd"));
 
-        TableColumn<Cliente, String> col7 = new TableColumn<>("Telefone");
-        col7.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        TableColumn<Cliente, String> col6 = new TableColumn<>("Telefone");
+        col6.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
-        TableColumn<Cliente, String> col8 = new TableColumn<>("Sexo");
-        col8.setCellValueFactory(new PropertyValueFactory<>("sexo"));
+        TableColumn<Cliente, String> col7 = new TableColumn<>("Sexo");
+        col7.setCellValueFactory(new PropertyValueFactory<>("sexo"));
 
-        TableColumn<Cliente, String> col9 = new TableColumn<>("Ações");
-        col9.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
-        col9.setCellFactory((tbCol) -> new TableCell<Cliente, String>(){
+        TableColumn<Cliente, String> col8 = new TableColumn<>("Ações");
+        col8.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        col8.setCellFactory((tbCol) -> new TableCell<Cliente, String>(){
             final Button btn = new Button("Remover");
 
             public void updateItem(String item, boolean empty) {
@@ -87,7 +87,7 @@ public class ClienteBoundary implements StrategyBoundary{
                         Optional<ButtonType> clicado = alert.showAndWait();
                         if (clicado.isPresent() &&
                                 clicado.get().equals(ButtonType.OK)) {
-                            control.remover(p);
+                            control.remover(p.getId());
                         }
                     });
                     setGraphic(btn);
@@ -96,7 +96,7 @@ public class ClienteBoundary implements StrategyBoundary{
             }
         });
 
-        table.getColumns().addAll(col1, col2, col3, col4, col5, col7, col8, col9);
+        table.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
 
         table.setItems(control.getListaCliente());
 
@@ -128,7 +128,7 @@ public class ClienteBoundary implements StrategyBoundary{
         Bindings.bindBidirectional(txtCPF.textProperty(), control.cpf);
         Bindings.bindBidirectional(txtNascimento.valueProperty(), control.dataNascimento);
 //        Bindings.bindBidirectional(txtDDD.textProperty(), control.ddd, new NumberStringConverter());
-        Bindings.bindBidirectional(txtNumTelefone.textProperty(), control.numTelefone);
+        Bindings.bindBidirectional(txtNumTelefone.textProperty(), control.telefone);
         Bindings.bindBidirectional(txtSexo.textProperty(), control.sexo);
 
         panCampos.add(new Label("Id"), 0, 0);
