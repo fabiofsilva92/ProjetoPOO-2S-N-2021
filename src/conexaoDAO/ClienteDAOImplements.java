@@ -14,7 +14,7 @@ public class ClienteDAOImplements implements ClienteDAO {
 
     private static final String DBURL = "jdbc:mariadb://localhost/POO_ACADEMIA";
     private static final String DBUSER = "root";
-    private static final String DBPASS = "123456";
+    private static final String DBPASS = "";
 
     public ClienteDAOImplements() {
         try {

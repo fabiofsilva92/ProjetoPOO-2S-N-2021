@@ -60,9 +60,6 @@ public class ClienteBoundary implements StrategyBoundary{
             return new ReadOnlyStringWrapper(strData);
         });
 
-//        TableColumn<Cliente, String> col6 = new TableColumn<>("DDD");
-//        col6.setCellValueFactory(new PropertyValueFactory<>("ddd"));
-
         TableColumn<Cliente, String> col6 = new TableColumn<>("Telefone");
         col6.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
@@ -127,7 +124,6 @@ public class ClienteBoundary implements StrategyBoundary{
         Bindings.bindBidirectional(txtSobrenome.textProperty(), control.sobrenome);
         Bindings.bindBidirectional(txtCPF.textProperty(), control.cpf);
         Bindings.bindBidirectional(txtNascimento.valueProperty(), control.dataNascimento);
-//        Bindings.bindBidirectional(txtDDD.textProperty(), control.ddd, new NumberStringConverter());
         Bindings.bindBidirectional(txtNumTelefone.textProperty(), control.telefone);
         Bindings.bindBidirectional(txtSexo.textProperty(), control.sexo);
 
@@ -146,9 +142,6 @@ public class ClienteBoundary implements StrategyBoundary{
 
         panCampos.add(new Label("Nascimento"), 0, 4);
         panCampos.add(txtNascimento, 1, 4);
-//
-//        panCampos.add(new Label("DDD"), 0, 5);
-//        panCampos.add(txtDDD, 1, 5);
 
         panCampos.add(new Label("Telefone"), 0, 5);
         panCampos.add(txtNumTelefone, 1, 5);
