@@ -18,7 +18,7 @@ public class ComoUsarBoundary implements StrategyBoundary{
 
         WebView webView = new WebView();
 
-        webView.getEngine().load("https://www.youtube.com/embed/96r3olimdkA");
+        webView.getEngine().load("https://www.youtube.com/embed/LK5v1OGhUI");
 
         VBox pane = new VBox(webView);
         return pane;
