@@ -3,6 +3,7 @@ package control;
 import DAO.ClienteDAO;
 import conexaoDAO.ClienteDAOImplements;
 import entity.Cliente;
+import entity.Funcionario;
 import entity.Telefone;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -21,7 +22,7 @@ public class ClienteControl {
     public StringProperty cpf = new SimpleStringProperty("");
     public ObjectProperty dataNascimento = new SimpleObjectProperty(LocalDate.now());
     //    public IntegerProperty ddd = new SimpleIntegerProperty(0);
-    public StringProperty numTelefone = new SimpleStringProperty("11-99999-9999");
+    public StringProperty telefone = new SimpleStringProperty("11-99999-9999");
     public StringProperty sexo = new SimpleStringProperty("");
 
     private ClienteDAO clienteDAO = new ClienteDAOImplements();
@@ -36,7 +37,7 @@ public class ClienteControl {
         c.setCpf(cpf.get());
         c.setDataNascimento((LocalDate) dataNascimento.get());
 //        c.setTelefone(new Telefone(ddd.get(), numTelefone.get()));
-        c.setTelefone(numTelefone.get());
+        c.setTelefone(telefone.get());
         c.setSexo(sexo.get());
         return c;
     }
@@ -48,7 +49,7 @@ public class ClienteControl {
         cpf.set(c.getCpf());
         dataNascimento.set(c.getDataNascimento());
 //        ddd.set(c.getTelefone().getDdd());
-        numTelefone.set(c.getTelefone());
+        telefone.set(c.getTelefone());
         sexo.set(c.getSexo());
     }
 
@@ -62,7 +63,6 @@ public class ClienteControl {
             clienteDAO.atualizar(id.get(), c);
         }
 
-        listaCliente.add(c);
         atualizarListaView();
     }
 
@@ -72,8 +72,9 @@ public class ClienteControl {
         listaView.addAll(clienteDAO.pesquisarPorNome(""));
     }
 
-    public void remover(Cliente cliente) {
-        listaCliente.remove(cliente);
+    public void remover(long id) {
+        clienteDAO.remover(id);
+        //listaCliente.remove(cliente);
         atualizarListaView();
     }
 
@@ -84,11 +85,14 @@ public class ClienteControl {
 
     public void pesquisar() {
         listaView.clear();
-        for (Cliente cliente : listaCliente) {
-            if (cliente.getNome().contains(nome.get())) {
-                listaView.add(cliente);
-            }
-        }
+        List<Cliente> encontrados = clienteDAO.pesquisarPorNome(nome.get());
+        listaView.addAll(encontrados);
+
+//        for (Cliente cliente : listaCliente) {
+//            if (cliente.getNome().contains(nome.get())) {
+//                listaView.add(cliente);
+//            }
+//        }
     }
 
     public void novoCliente() {

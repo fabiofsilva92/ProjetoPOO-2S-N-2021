@@ -40,7 +40,7 @@ public class EquipamentoBoundary implements StrategyBoundary{
         col2.setCellValueFactory( new PropertyValueFactory<>("nome"));
 
         TableColumn<Equipamento, String> col3 = new TableColumn<>("Fabricante");
-        col2.setCellValueFactory( new PropertyValueFactory<>("fabricante"));
+        col3.setCellValueFactory( new PropertyValueFactory<>("fabricante"));
 
         TableColumn<Equipamento, String> col4 = new TableColumn<>("Ano");
         col4.setCellValueFactory( new PropertyValueFactory<>("ano"));

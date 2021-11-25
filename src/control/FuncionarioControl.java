@@ -14,7 +14,7 @@ public class FuncionarioControl {
     public LongProperty id = new SimpleLongProperty(0);
     public StringProperty nome = new SimpleStringProperty("");
     public StringProperty sobrenome = new SimpleStringProperty("");
-    public StringProperty cpf = new SimpleStringProperty("");
+    public StringProperty cpf = new SimpleStringProperty("000.000.000-00");
     public ObjectProperty dataNascimento = new SimpleObjectProperty(LocalDate.now());
     public ObjectProperty dataInicio = new SimpleObjectProperty(LocalDate.now());
     public StringProperty sexo = new SimpleStringProperty("");
